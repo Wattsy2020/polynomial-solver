@@ -28,7 +28,7 @@ def find_roots(poly):
 def bisection_estimate(poly, interval, depth=0):
     midpoint = (interval[0] + interval[1])/2
 
-    if abs(evaluate_poly(poly, midpoint)) <= 0.001:  # once estimate is good enough return it
+    if abs(evaluate_poly(poly, midpoint)) <= 0.0000000001:  # once estimate is good enough return it
         return midpoint
 
     # Since we are searching in intervals between the stationary points the function is constantly increasing
@@ -75,10 +75,14 @@ def parse_term(term):
 
 
 def main():
+    print('All polynomials must be entered in the form (+/-)ax^n for the program to work')
+    print('For example: "+1x^2 -4x^1 +1x^0" is valid whereas "x^2 -4x + 1" is not')
     while True:
-        # terms must be of form (+/-)ax^n
         poly = input('Enter a polynomial: ').split(' ')  # polynomial is represented as a list of terms
-        print(find_roots(poly))
+
+        print('The roots are: ')
+        for root in find_roots(poly):
+            print('x = {}'.format(root))
 
 
 if __name__ == '__main__':
